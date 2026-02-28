@@ -6,7 +6,7 @@
     <ProjectGuid>{DA33DB7F-F259-4C21-A4A4-ECEC9E83EA8E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AssemblyName>Shaiya Data file Tool</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <RootNamespace>Shaiya_Data_file_Tool</RootNamespace>
     <FileUpgradeFlags>
@@ -148,4 +148,5 @@
     <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
 </Project>
