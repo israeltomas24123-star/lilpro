@@ -2,13 +2,13 @@ name: Build .NET Framework 4.8
 
 on:
   push:
-    branches: [ "main", "master" ] # Adjust to your default branch name
+    branches: [ "main", "master" ]
   pull_request:
     branches: [ "main", "master" ]
 
 jobs:
   build:
-    runs-on: windows-latest # Required for .NET Framework 4.8
+    runs-on: windows-latest
 
     steps:
     - name: Checkout code
@@ -20,11 +20,19 @@ jobs:
     - name: Setup NuGet
       uses: NuGet/setup-nuget@v1
 
+    # This step finds the .sln file and saves it to a variable
+    - name: Find Solution File
+      id: find_sln
+      run: |
+        $slnFile = Get-ChildItem -Recuricve -Filter *.sln | Select-Object -First 1 -ExpandProperty FullName
+        echo "SLN_PATH=$slnFile" >> $env:GITHUB_ENV
+        Write-Host "Found solution at: $slnFile"
+
     - name: Restore NuGet Packages
-      run: nuget restore Shaiya Data Tool.sln # Replace 'YourSolution.sln' with your actual .sln filename
+      run: nuget restore "${{ env.SLN_PATH }}"
 
     - name: Build Solution
-      run: msbuild Shaiya Data Tool.sln /p:Configuration=Release /p:Platform="Any CPU"
+      run: msbuild "${{ env.SLN_PATH }}" /p:Configuration=Release /p:Platform="Any CPU"
 
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v4
