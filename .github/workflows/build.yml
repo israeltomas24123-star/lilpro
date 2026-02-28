@@ -2,9 +2,7 @@ name: Build Shaiya Data Tool
 
 on:
   push:
-    branches: [ "main", "master" ]
-  pull_request:
-    branches: [ "main", "master" ]
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -17,20 +15,14 @@ jobs:
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v2
 
-    - name: Setup NuGet
-      uses: NuGet/setup-nuget@v1
-
-    - name: Restore NuGet Packages
-      # Use quotes because the filename contains spaces
-      run: nuget restore "Shaiya Data Tool.sln"
-
     - name: Build Solution
-      # Use quotes here as well
+      # We skip nuget restore since you are providing DLLs manually
       run: msbuild "Shaiya Data Tool.sln" /p:Configuration=Release /p:Platform="Any CPU"
 
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: shaiya-tool-exe
+        name: ShaiyaTool-Compiled
         path: |
-          **/bin/Release/
+          **/bin/Release/*.exe
+          **/bin/Release/*.dll
