@@ -16,13 +16,12 @@ jobs:
       uses: microsoft/setup-msbuild@v2
 
     - name: Build Solution
-      # We skip nuget restore since you are providing DLLs manually
       run: msbuild "Shaiya Data Tool.sln" /p:Configuration=Release /p:Platform="Any CPU"
 
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: ShaiyaTool-Compiled
+        name: Compiled-Tool
         path: |
           **/bin/Release/*.exe
           **/bin/Release/*.dll
