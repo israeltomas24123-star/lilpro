@@ -21,10 +21,10 @@ jobs:
       uses: NuGet/setup-nuget@v1
 
     - name: Restore NuGet Packages
-      run: nuget restore YourSolution.sln # Replace 'YourSolution.sln' with your actual .sln filename
+      run: nuget restore Shaiya Data Tool.sln # Replace 'YourSolution.sln' with your actual .sln filename
 
     - name: Build Solution
-      run: msbuild YourSolution.sln /p:Configuration=Release /p:Platform="Any CPU"
+      run: msbuild Shaiya Data Tool.sln /p:Configuration=Release /p:Platform="Any CPU"
 
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v4
